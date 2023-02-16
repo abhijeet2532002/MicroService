@@ -1,0 +1,30 @@
+#server port number application .....
+server:
+  port: 9194
+
+#Application name .....
+spring:
+  application:
+    name: API-GATEWAY
+
+  #User gateway .....
+  cloud:
+    gateway:
+      routes:
+        - id: ABHIJEET-USER
+          uri: lb://ABHIJEET-USER
+          predicates:
+            - Path=/user/**
+
+        - id: ABHIJEET-RATING
+          uri: lb://ABHIJEET-RATING
+          predicates:
+            - Path=/abhijeetRating/**
+
+        - id: ABHIJEET-HOTEL
+          uri: lb://ABHIJEET-HOTEL
+          predicates:
+            - Path=/Hotel/**,/staff/**
+
+  config:
+    import: configserver:http://localhost:9195
